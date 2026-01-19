@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.context.BaseController;
 import com.ruoyi.system.domain.Server;
 
 /**

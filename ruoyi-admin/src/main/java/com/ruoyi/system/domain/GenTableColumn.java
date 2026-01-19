@@ -1,7 +1,7 @@
 package com.ruoyi.system.domain;
 
 import javax.validation.constraints.NotBlank;
-import com.ruoyi.common.core.domain.BaseEntity;
+import com.ruoyi.common.domain.BaseEntity;
 import com.ruoyi.common.utils.StringUtils;
 
 /**

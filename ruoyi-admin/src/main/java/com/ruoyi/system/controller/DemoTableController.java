@@ -1,12 +1,12 @@
 package com.ruoyi.system.controller;
 
-import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.BaseEntity;
-import com.ruoyi.common.core.domain.R;
-import com.ruoyi.common.core.page.PageDomain;
-import com.ruoyi.common.core.page.TableDataInfo;
-import com.ruoyi.common.core.page.TableSupport;
-import com.ruoyi.common.core.text.Convert;
+import com.ruoyi.common.context.BaseController;
+import com.ruoyi.common.domain.BaseEntity;
+import com.ruoyi.common.domain.R;
+import com.ruoyi.common.domain.PageDomain;
+import com.ruoyi.common.domain.TableDataInfo;
+import com.ruoyi.common.utils.TableSupport;
+import com.ruoyi.common.utils.Convert;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.system.domain.demo.AreaModel;

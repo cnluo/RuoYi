@@ -3,7 +3,7 @@ package com.ruoyi.system.domain;
 import java.util.Date;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.annotation.Excel.Type;
-import com.ruoyi.common.core.domain.BaseEntity;
+import com.ruoyi.common.domain.BaseEntity;
 import com.ruoyi.common.utils.DateUtils;
 
 public class UserOperateModel extends BaseEntity

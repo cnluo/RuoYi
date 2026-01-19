@@ -8,8 +8,8 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.SubjectContext;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
-import com.ruoyi.common.core.domain.entity.SysRole;
-import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.system.domain.SysRole;
+import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.common.shiro.service.SysLoginService;
 

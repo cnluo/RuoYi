@@ -1,4 +1,4 @@
-package com.ruoyi.common.config.properties;
+package com.ruoyi.common.config;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

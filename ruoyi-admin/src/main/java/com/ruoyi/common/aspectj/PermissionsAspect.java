@@ -5,7 +5,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
-import com.ruoyi.common.core.context.PermissionContextHolder;
+import com.ruoyi.common.context.PermissionContextHolder;
 import com.ruoyi.common.utils.StringUtils;
 
 /**

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
-import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.context.BaseController;
 
 /**
  * 图片验证码（支持算术形式）

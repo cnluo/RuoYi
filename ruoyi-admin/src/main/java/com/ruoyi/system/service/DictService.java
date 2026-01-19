@@ -3,7 +3,7 @@ package com.ruoyi.system.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.common.core.domain.entity.SysDictData;
+import com.ruoyi.system.domain.SysDictData;
 
 /**
  * RuoYi首创 html调用 thymeleaf 实现字典读取

@@ -19,8 +19,8 @@ import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ruoyi.common.constant.ShiroConstants;
-import com.ruoyi.common.core.domain.R;
-import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.domain.R;
+import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.ShiroUtils;
 

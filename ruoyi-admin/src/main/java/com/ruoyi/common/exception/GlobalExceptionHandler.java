@@ -2,6 +2,8 @@ package com.ruoyi.common.exception;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ruoyi.common.domain.R;
+import com.ruoyi.common.utils.Convert;
 import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +14,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.ModelAndView;
-import com.ruoyi.common.core.domain.R;
-import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.html.EscapeUtil;

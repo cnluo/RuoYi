@@ -1,8 +1,8 @@
 package com.ruoyi.system.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.ruoyi.common.core.domain.CxSelect;
-import com.ruoyi.common.core.domain.R;
+import com.ruoyi.common.domain.CxSelect;
+import com.ruoyi.common.domain.R;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.domain.demo.UserFormModel;
 import org.springframework.stereotype.Controller;

@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 import org.springframework.util.AntPathMatcher;
 import com.ruoyi.common.constant.Constants;
-import com.ruoyi.common.core.text.StrFormatter;
 
 /**
  * 字符串工具类

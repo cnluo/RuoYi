@@ -1,11 +1,11 @@
-package com.ruoyi.common.core.controller;
+package com.ruoyi.common.context;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.ruoyi.common.core.domain.entity.SysUser;
-import com.ruoyi.common.core.page.PageDomain;
-import com.ruoyi.common.core.page.TableDataInfo;
-import com.ruoyi.common.core.page.TableSupport;
+import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.common.domain.PageDomain;
+import com.ruoyi.common.domain.TableDataInfo;
+import com.ruoyi.common.utils.TableSupport;
 import com.ruoyi.common.utils.*;
 import com.ruoyi.common.utils.sql.SqlUtil;
 import org.slf4j.Logger;

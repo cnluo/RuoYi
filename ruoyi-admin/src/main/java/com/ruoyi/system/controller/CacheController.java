@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.R;
+import com.ruoyi.common.context.BaseController;
+import com.ruoyi.common.domain.R;
 import com.ruoyi.system.service.CacheService;
 
 /**

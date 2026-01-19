@@ -1,4 +1,4 @@
-package com.ruoyi.common.core.page;
+package com.ruoyi.common.domain;
 
 import com.ruoyi.common.utils.StringUtils;
 

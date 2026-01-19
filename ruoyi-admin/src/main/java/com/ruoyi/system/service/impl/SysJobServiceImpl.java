@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ruoyi.common.constant.ScheduleConstants;
-import com.ruoyi.common.core.text.Convert;
+import com.ruoyi.common.utils.Convert;
 import com.ruoyi.common.exception.job.TaskException;
 import com.ruoyi.system.domain.SysJob;
 import com.ruoyi.system.mapper.SysJobMapper;

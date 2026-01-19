@@ -9,7 +9,7 @@ import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Value;
 import com.ruoyi.common.constant.ShiroConstants;
-import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.common.enums.OnlineStatus;
 import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.shiro.session.OnlineSession;

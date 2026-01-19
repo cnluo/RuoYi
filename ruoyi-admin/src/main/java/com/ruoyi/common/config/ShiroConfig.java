@@ -1,7 +1,6 @@
 package com.ruoyi.common.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
-import com.ruoyi.common.config.properties.PermitAllUrlProperties;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.shiro.realm.UserRealm;
 import com.ruoyi.common.shiro.rememberMe.CustomCookieRememberMeManager;

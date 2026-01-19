@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.Date;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.annotation.Excel.ColumnType;
-import com.ruoyi.common.core.domain.BaseEntity;
+import com.ruoyi.common.domain.BaseEntity;
 
 /**
  * 操作日志记录表 oper_log

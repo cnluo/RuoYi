@@ -1,9 +1,7 @@
-package com.ruoyi.common.core.text;
+package com.ruoyi.common.utils;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-
-import com.ruoyi.common.utils.StringUtils;
 
 /**
  * 字符集工具类
@@ -11,10 +9,6 @@ import com.ruoyi.common.utils.StringUtils;
  * @author ruoyi
  */
 public class CharsetKit {
-    /**
-     * UTF-8
-     */
-    public static final String UTF_8 = "UTF-8";
     /**
      * UTF-8
      */

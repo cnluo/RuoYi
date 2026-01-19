@@ -1,4 +1,4 @@
-package com.ruoyi.common.core.domain.entity;
+package com.ruoyi.system.domain;
 
 import java.util.Date;
 import java.util.List;
@@ -10,7 +10,7 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.annotation.Excel.ColumnType;
 import com.ruoyi.common.annotation.Excel.Type;
 import com.ruoyi.common.annotation.Excels;
-import com.ruoyi.common.core.domain.BaseEntity;
+import com.ruoyi.common.domain.BaseEntity;
 import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.xss.Xss;
 

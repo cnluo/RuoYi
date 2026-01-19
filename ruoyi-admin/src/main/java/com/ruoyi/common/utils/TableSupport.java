@@ -1,7 +1,6 @@
-package com.ruoyi.common.core.page;
+package com.ruoyi.common.utils;
 
-import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.common.utils.ServletUtils;
+import com.ruoyi.common.domain.PageDomain;
 
 /**
  * 表格数据处理

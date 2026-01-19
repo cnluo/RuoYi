@@ -1,8 +1,8 @@
-package com.ruoyi.common.core.context;
+package com.ruoyi.common.context;
 
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
-import com.ruoyi.common.core.text.Convert;
+import com.ruoyi.common.utils.Convert;
 
 /**
  * 权限信息

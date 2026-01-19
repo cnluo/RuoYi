@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import com.ruoyi.common.constant.ShiroConstants;
-import com.ruoyi.common.core.text.Convert;
+import com.ruoyi.common.utils.Convert;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.utils.StringUtils;

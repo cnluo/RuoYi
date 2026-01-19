@@ -1,4 +1,4 @@
-package com.ruoyi.common.core.text;
+package com.ruoyi.common.utils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -8,7 +8,6 @@ import java.nio.charset.Charset;
 import java.text.NumberFormat;
 import java.util.Set;
 
-import com.ruoyi.common.utils.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
@@ -270,7 +269,7 @@ public class Convert {
      * 转换为Integer数组<br>
      *
      * @param split 分隔符
-     * @param split 被转换的值
+     * @param str   被转换的值
      * @return 结果
      */
     public static Integer[] toIntArray(String split, String str) {
@@ -323,7 +322,7 @@ public class Convert {
      * 转换为String数组<br>
      *
      * @param split 分隔符
-     * @param split 被转换的值
+     * @param str   被转换的值
      * @return 结果
      */
     public static String[] toStrArray(String split, String str) {
@@ -811,9 +810,8 @@ public class Convert {
                 c[i] = (char) (c[i] - 65248);
             }
         }
-        String returnString = new String(c);
 
-        return returnString;
+        return new String(c);
     }
 
     /**
@@ -830,28 +828,28 @@ public class Convert {
         String head = n < 0 ? "负" : "";
         n = Math.abs(n);
 
-        String s = "";
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < fraction.length; i++) {
             // 优化double计算精度丢失问题
             BigDecimal nNum = new BigDecimal(n);
             BigDecimal decimal = new BigDecimal(10);
             BigDecimal scale = nNum.multiply(decimal).setScale(2, RoundingMode.HALF_EVEN);
             double d = scale.doubleValue();
-            s += (digit[(int) (Math.floor(d * Math.pow(10, i)) % 10)] + fraction[i]).replaceAll("(零.)+", "");
+            sb.append((digit[(int) (Math.floor(d * Math.pow(10, i)) % 10)] + fraction[i]).replaceAll("(零.)+", ""));
         }
-        if (s.length() < 1) {
-            s = "整";
+        if (sb.length() == 0) {
+            sb = new StringBuilder("整");
         }
         int integerPart = (int) Math.floor(n);
 
         for (int i = 0; i < unit[0].length && integerPart > 0; i++) {
-            String p = "";
+            StringBuilder p = new StringBuilder();
             for (int j = 0; j < unit[1].length && n > 0; j++) {
-                p = digit[integerPart % 10] + unit[1][j] + p;
+                p.insert(0, digit[integerPart % 10] + unit[1][j]);
                 integerPart = integerPart / 10;
             }
-            s = p.replaceAll("(零.)*零$", "").replaceAll("^$", "零") + unit[0][i] + s;
+            sb.insert(0, p.toString().replaceAll("(零.)*零$", "").replaceAll("^$", "零") + unit[0][i]);
         }
-        return head + s.replaceAll("(零.)*零元", "元").replaceFirst("(零.)+", "").replaceAll("(零.)+", "零").replaceAll("^整$", "零元整");
+        return head + sb.toString().replaceAll("(零.)*零元", "元").replaceFirst("(零.)+", "").replaceAll("(零.)+", "零").replaceAll("^整$", "零元整");
     }
 }

@@ -1,4 +1,4 @@
-package com.ruoyi.common.core.page;
+package com.ruoyi.common.domain;
 
 import java.io.Serializable;
 import java.util.List;

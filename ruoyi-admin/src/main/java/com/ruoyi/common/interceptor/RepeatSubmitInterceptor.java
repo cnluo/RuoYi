@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import com.ruoyi.common.annotation.RepeatSubmit;
-import com.ruoyi.common.core.domain.R;
+import com.ruoyi.common.domain.R;
 import com.ruoyi.common.utils.ServletUtils;
 
 /**

@@ -3,7 +3,7 @@ package com.ruoyi.common.utils;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.constant.Constants;
-import com.ruoyi.common.core.domain.entity.SysDictData;
+import com.ruoyi.system.domain.SysDictData;
 
 /**
  * 字典工具类
