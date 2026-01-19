@@ -1,6 +1,7 @@
 package com.ruoyi.system.controller;
 
 import java.util.List;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.core.domain.Ztree;
 import com.ruoyi.common.core.domain.entity.SysMenu;
 import com.ruoyi.common.core.domain.entity.SysRole;
@@ -25,13 +26,12 @@ import com.ruoyi.system.service.ISysMenuService;
 
 /**
  * 菜单信息
- * 
+ *
  * @author ruoyi
  */
 @Controller
 @RequestMapping("/system/menu")
-public class SysMenuController extends BaseController
-{
+public class SysMenuController extends BaseController {
     private String prefix = "system/menu";
 
     @Autowired
@@ -39,16 +39,14 @@ public class SysMenuController extends BaseController
 
     @RequiresPermissions("system:menu:view")
     @GetMapping()
-    public String menu()
-    {
+    public String menu() {
         return prefix + "/menu";
     }
 
     @RequiresPermissions("system:menu:list")
     @PostMapping("/list")
     @ResponseBody
-    public List<SysMenu> list(SysMenu menu)
-    {
+    public List<SysMenu> list(SysMenu menu) {
         Long userId = ShiroUtils.getUserId();
         List<SysMenu> menuList = menuService.selectMenuList(menu, userId);
         return menuList;
@@ -61,18 +59,15 @@ public class SysMenuController extends BaseController
     @RequiresPermissions("system:menu:remove")
     @GetMapping("/remove/{menuId}")
     @ResponseBody
-    public AjaxResult remove(@PathVariable("menuId") Long menuId)
-    {
-        if (menuService.selectCountMenuByParentId(menuId) > 0)
-        {
-            return AjaxResult.warn("存在子菜单,不允许删除");
+    public R remove(@PathVariable("menuId") Long menuId) {
+        if (menuService.selectCountMenuByParentId(menuId) > 0) {
+            return R.fail("存在子菜单,不允许删除");
         }
-        if (menuService.selectCountRoleMenuByMenuId(menuId) > 0)
-        {
-            return AjaxResult.warn("菜单已分配,不允许删除");
+        if (menuService.selectCountRoleMenuByMenuId(menuId) > 0) {
+            return R.fail("菜单已分配,不允许删除");
         }
         AuthorizationUtils.clearAllCachedAuthorizationInfo();
-        return toAjax(menuService.deleteMenuById(menuId));
+        return R.ok(menuService.deleteMenuById(menuId));
     }
 
     /**
@@ -80,15 +75,11 @@ public class SysMenuController extends BaseController
      */
     @RequiresPermissions("system:menu:add")
     @GetMapping("/add/{parentId}")
-    public String add(@PathVariable("parentId") Long parentId, ModelMap mmap)
-    {
+    public String add(@PathVariable("parentId") Long parentId, ModelMap mmap) {
         SysMenu menu = null;
-        if (0L != parentId)
-        {
+        if (0L != parentId) {
             menu = menuService.selectMenuById(parentId);
-        }
-        else
-        {
+        } else {
             menu = new SysMenu();
             menu.setMenuId(0L);
             menu.setMenuName("主目录");
@@ -104,15 +95,13 @@ public class SysMenuController extends BaseController
     @RequiresPermissions("system:menu:add")
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(@Validated SysMenu menu)
-    {
-        if (!menuService.checkMenuNameUnique(menu))
-        {
-            return error("新增菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
+    public R addSave(@Validated SysMenu menu) {
+        if (!menuService.checkMenuNameUnique(menu)) {
+            return R.fail("新增菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
         }
         menu.setCreateBy(getLoginName());
         AuthorizationUtils.clearAllCachedAuthorizationInfo();
-        return toAjax(menuService.insertMenu(menu));
+        return R.ok(menuService.insertMenu(menu));
     }
 
     /**
@@ -120,8 +109,7 @@ public class SysMenuController extends BaseController
      */
     @RequiresPermissions("system:menu:edit")
     @GetMapping("/edit/{menuId}")
-    public String edit(@PathVariable("menuId") Long menuId, ModelMap mmap)
-    {
+    public String edit(@PathVariable("menuId") Long menuId, ModelMap mmap) {
         mmap.put("menu", menuService.selectMenuById(menuId));
         return prefix + "/edit";
     }
@@ -133,15 +121,13 @@ public class SysMenuController extends BaseController
     @RequiresPermissions("system:menu:edit")
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(@Validated SysMenu menu)
-    {
-        if (!menuService.checkMenuNameUnique(menu))
-        {
-            return error("修改菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
+    public R editSave(@Validated SysMenu menu) {
+        if (!menuService.checkMenuNameUnique(menu)) {
+            return R.fail("修改菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
         }
         menu.setUpdateBy(getLoginName());
         AuthorizationUtils.clearAllCachedAuthorizationInfo();
-        return toAjax(menuService.updateMenu(menu));
+        return R.ok(menuService.updateMenu(menu));
     }
 
     /**
@@ -149,18 +135,16 @@ public class SysMenuController extends BaseController
      */
     @PostMapping("/updateSort")
     @ResponseBody
-    public AjaxResult updateSort(@RequestParam String[] menuIds, @RequestParam String[] orderNums)
-    {
+    public R updateSort(@RequestParam String[] menuIds, @RequestParam String[] orderNums) {
         menuService.updateMenuSort(menuIds, orderNums);
-        return success();
+        return R.ok();
     }
 
     /**
      * 选择菜单图标
      */
     @GetMapping("/icon")
-    public String icon()
-    {
+    public String icon() {
         return prefix + "/icon";
     }
 
@@ -169,8 +153,7 @@ public class SysMenuController extends BaseController
      */
     @PostMapping("/checkMenuNameUnique")
     @ResponseBody
-    public boolean checkMenuNameUnique(SysMenu menu)
-    {
+    public boolean checkMenuNameUnique(SysMenu menu) {
         return menuService.checkMenuNameUnique(menu);
     }
 
@@ -179,8 +162,7 @@ public class SysMenuController extends BaseController
      */
     @GetMapping("/roleMenuTreeData")
     @ResponseBody
-    public List<Ztree> roleMenuTreeData(SysRole role)
-    {
+    public List<Ztree> roleMenuTreeData(SysRole role) {
         Long userId = ShiroUtils.getUserId();
         List<Ztree> ztrees = menuService.roleMenuTreeData(role, userId);
         return ztrees;
@@ -191,8 +173,7 @@ public class SysMenuController extends BaseController
      */
     @GetMapping("/menuTreeData")
     @ResponseBody
-    public List<Ztree> menuTreeData()
-    {
+    public List<Ztree> menuTreeData() {
         Long userId = ShiroUtils.getUserId();
         List<Ztree> ztrees = menuService.menuTreeData(userId);
         return ztrees;
@@ -202,8 +183,7 @@ public class SysMenuController extends BaseController
      * 选择菜单树
      */
     @GetMapping("/selectMenuTree/{menuId}")
-    public String selectMenuTree(@PathVariable("menuId") Long menuId, ModelMap mmap)
-    {
+    public String selectMenuTree(@PathVariable("menuId") Long menuId, ModelMap mmap) {
         mmap.put("menu", menuService.selectMenuById(menuId));
         return prefix + "/tree";
     }

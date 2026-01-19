@@ -1,6 +1,7 @@
 package com.ruoyi.system.controller;
 
 import java.util.List;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.StringUtils;
@@ -25,13 +26,12 @@ import com.ruoyi.system.service.ISysJobService;
 
 /**
  * 调度日志操作处理
- * 
+ *
  * @author ruoyi
  */
 @Controller
 @RequestMapping("/monitor/jobLog")
-public class SysJobLogController extends BaseController
-{
+public class SysJobLogController extends BaseController {
     private String prefix = "monitor/job";
 
     @Autowired
@@ -42,10 +42,8 @@ public class SysJobLogController extends BaseController
 
     @RequiresPermissions("monitor:job:view")
     @GetMapping()
-    public String jobLog(@RequestParam(value = "jobId", required = false) Long jobId, ModelMap mmap)
-    {
-        if (StringUtils.isNotNull(jobId))
-        {
+    public String jobLog(@RequestParam(value = "jobId", required = false) Long jobId, ModelMap mmap) {
+        if (StringUtils.isNotNull(jobId)) {
             SysJob job = jobService.selectJobById(jobId);
             mmap.put("job", job);
         }
@@ -55,8 +53,7 @@ public class SysJobLogController extends BaseController
     @RequiresPermissions("monitor:job:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(SysJobLog jobLog)
-    {
+    public TableDataInfo list(SysJobLog jobLog) {
         startPage();
         List<SysJobLog> list = jobLogService.selectJobLogList(jobLog);
         return getDataTable(list);
@@ -66,8 +63,7 @@ public class SysJobLogController extends BaseController
     @RequiresPermissions("monitor:job:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(SysJobLog jobLog)
-    {
+    public R export(SysJobLog jobLog) {
         List<SysJobLog> list = jobLogService.selectJobLogList(jobLog);
         ExcelUtil<SysJobLog> util = new ExcelUtil<SysJobLog>(SysJobLog.class);
         return util.exportExcel(list, "调度日志");
@@ -77,15 +73,13 @@ public class SysJobLogController extends BaseController
     @RequiresPermissions("monitor:job:remove")
     @PostMapping("/remove")
     @ResponseBody
-    public AjaxResult remove(String ids)
-    {
-        return toAjax(jobLogService.deleteJobLogByIds(ids));
+    public R remove(String ids) {
+        return R.ok(jobLogService.deleteJobLogByIds(ids));
     }
 
     @RequiresPermissions("monitor:job:detail")
     @GetMapping("/detail/{jobLogId}")
-    public String detail(@PathVariable("jobLogId") Long jobLogId, ModelMap mmap)
-    {
+    public String detail(@PathVariable("jobLogId") Long jobLogId, ModelMap mmap) {
         mmap.put("name", "jobLog");
         mmap.put("jobLog", jobLogService.selectJobLogById(jobLogId));
         return prefix + "/detail";
@@ -95,9 +89,8 @@ public class SysJobLogController extends BaseController
     @RequiresPermissions("monitor:job:remove")
     @PostMapping("/clean")
     @ResponseBody
-    public AjaxResult clean()
-    {
+    public R clean() {
         jobLogService.cleanJobLog();
-        return success();
+        return R.ok();
     }
 }

@@ -1,20 +1,21 @@
 package com.ruoyi.system.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.alibaba.fastjson.JSON;
+import com.ruoyi.common.core.domain.CxSelect;
+import com.ruoyi.common.core.domain.R;
+import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.system.domain.demo.UserFormModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.alibaba.fastjson.JSON;
-import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.core.domain.CxSelect;
-import com.ruoyi.common.utils.StringUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 表单相关
@@ -282,12 +283,11 @@ public class DemoFormController {
      */
     @GetMapping("/userModel")
     @ResponseBody
-    public AjaxResult userModel() {
-        AjaxResult ajax = new AjaxResult();
-
+    public R userModel() {
+        Map<String, Object> ajax = new HashMap<>();
         ajax.put("code", 200);
         ajax.put("value", users);
-        return ajax;
+        return R.ok(ajax);
     }
 
     /**
@@ -295,76 +295,10 @@ public class DemoFormController {
      */
     @GetMapping("/collection")
     @ResponseBody
-    public AjaxResult collection() {
+    public R collection() {
         String[] array = {"ruoyi 1", "ruoyi 2", "ruoyi 3", "ruoyi 4", "ruoyi 5"};
-        AjaxResult ajax = new AjaxResult();
+        Map<String, Object> ajax = new HashMap<>();
         ajax.put("value", array);
-        return ajax;
+        return R.ok(ajax);
     }
-}
-
-class UserFormModel {
-    /**
-     * 用户ID
-     */
-    private int userId;
-
-    /**
-     * 用户编号
-     */
-    private String userCode;
-
-    /**
-     * 用户姓名
-     */
-    private String userName;
-
-    /**
-     * 用户手机
-     */
-    private String userPhone;
-
-    public UserFormModel() {
-
-    }
-
-    public UserFormModel(int userId, String userCode, String userName, String userPhone) {
-        this.userId = userId;
-        this.userCode = userCode;
-        this.userName = userName;
-        this.userPhone = userPhone;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getUserCode() {
-        return userCode;
-    }
-
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserPhone() {
-        return userPhone;
-    }
-
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
-    }
-
 }

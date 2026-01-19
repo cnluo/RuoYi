@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.constant.ShiroConstants;
 import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.core.domain.entity.SysMenu;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.text.Convert;
@@ -100,19 +100,19 @@ public class SysIndexController extends BaseController
     // 解锁屏幕
     @PostMapping("/unlockscreen")
     @ResponseBody
-    public AjaxResult unlockscreen(String password)
+    public R unlockscreen(String password)
     {
         SysUser user = getSysUser();
         if (StringUtils.isNull(user))
         {
-            return AjaxResult.error("服务器超时，请重新登录");
+            return R.fail("服务器超时，请重新登录");
         }
         if (passwordService.matches(user, password))
         {
             ServletUtils.getSession().removeAttribute(ShiroConstants.LOCK_SCREEN);
-            return AjaxResult.success();
+            return R.ok();
         }
-        return AjaxResult.error("密码不正确，请重新输入。");
+        return R.fail("密码不正确，请重新输入。");
     }
 
     // 切换主题

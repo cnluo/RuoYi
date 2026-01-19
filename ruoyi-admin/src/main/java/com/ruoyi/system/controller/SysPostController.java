@@ -1,6 +1,7 @@
 package com.ruoyi.system.controller;
 
 import java.util.List;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -22,13 +23,12 @@ import com.ruoyi.system.service.ISysPostService;
 
 /**
  * 岗位信息操作处理
- * 
+ *
  * @author ruoyi
  */
 @Controller
 @RequestMapping("/system/post")
-public class SysPostController extends BaseController
-{
+public class SysPostController extends BaseController {
     private String prefix = "system/post";
 
     @Autowired
@@ -36,16 +36,14 @@ public class SysPostController extends BaseController
 
     @RequiresPermissions("system:post:view")
     @GetMapping()
-    public String operlog()
-    {
+    public String operlog() {
         return prefix + "/post";
     }
 
     @RequiresPermissions("system:post:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(SysPost post)
-    {
+    public TableDataInfo list(SysPost post) {
         startPage();
         List<SysPost> list = postService.selectPostList(post);
         return getDataTable(list);
@@ -55,8 +53,7 @@ public class SysPostController extends BaseController
     @RequiresPermissions("system:post:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(SysPost post)
-    {
+    public R export(SysPost post) {
         List<SysPost> list = postService.selectPostList(post);
         ExcelUtil<SysPost> util = new ExcelUtil<SysPost>(SysPost.class);
         return util.exportExcel(list, "岗位数据");
@@ -66,9 +63,8 @@ public class SysPostController extends BaseController
     @Log(title = "岗位管理", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
-    public AjaxResult remove(String ids)
-    {
-        return toAjax(postService.deletePostByIds(ids));
+    public R remove(String ids) {
+        return R.ok(postService.deletePostByIds(ids));
     }
 
     /**
@@ -76,8 +72,7 @@ public class SysPostController extends BaseController
      */
     @RequiresPermissions("system:post:add")
     @GetMapping("/add")
-    public String add()
-    {
+    public String add() {
         return prefix + "/add";
     }
 
@@ -88,18 +83,14 @@ public class SysPostController extends BaseController
     @Log(title = "岗位管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(@Validated SysPost post)
-    {
-        if (!postService.checkPostNameUnique(post))
-        {
-            return error("新增岗位'" + post.getPostName() + "'失败，岗位名称已存在");
-        }
-        else if (!postService.checkPostCodeUnique(post))
-        {
-            return error("新增岗位'" + post.getPostName() + "'失败，岗位编码已存在");
+    public R addSave(@Validated SysPost post) {
+        if (!postService.checkPostNameUnique(post)) {
+            return R.fail("新增岗位'" + post.getPostName() + "'失败，岗位名称已存在");
+        } else if (!postService.checkPostCodeUnique(post)) {
+            return R.fail("新增岗位'" + post.getPostName() + "'失败，岗位编码已存在");
         }
         post.setCreateBy(getLoginName());
-        return toAjax(postService.insertPost(post));
+        return R.ok(postService.insertPost(post));
     }
 
     /**
@@ -107,8 +98,7 @@ public class SysPostController extends BaseController
      */
     @RequiresPermissions("system:post:edit")
     @GetMapping("/edit/{postId}")
-    public String edit(@PathVariable("postId") Long postId, ModelMap mmap)
-    {
+    public String edit(@PathVariable("postId") Long postId, ModelMap mmap) {
         mmap.put("post", postService.selectPostById(postId));
         return prefix + "/edit";
     }
@@ -120,18 +110,14 @@ public class SysPostController extends BaseController
     @Log(title = "岗位管理", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(@Validated SysPost post)
-    {
-        if (!postService.checkPostNameUnique(post))
-        {
-            return error("修改岗位'" + post.getPostName() + "'失败，岗位名称已存在");
-        }
-        else if (!postService.checkPostCodeUnique(post))
-        {
-            return error("修改岗位'" + post.getPostName() + "'失败，岗位编码已存在");
+    public R editSave(@Validated SysPost post) {
+        if (!postService.checkPostNameUnique(post)) {
+            return R.fail("修改岗位'" + post.getPostName() + "'失败，岗位名称已存在");
+        } else if (!postService.checkPostCodeUnique(post)) {
+            return R.fail("修改岗位'" + post.getPostName() + "'失败，岗位编码已存在");
         }
         post.setUpdateBy(getLoginName());
-        return toAjax(postService.updatePost(post));
+        return R.ok(postService.updatePost(post));
     }
 
     /**
@@ -139,8 +125,7 @@ public class SysPostController extends BaseController
      */
     @PostMapping("/checkPostNameUnique")
     @ResponseBody
-    public boolean checkPostNameUnique(SysPost post)
-    {
+    public boolean checkPostNameUnique(SysPost post) {
         return postService.checkPostNameUnique(post);
     }
 
@@ -149,8 +134,7 @@ public class SysPostController extends BaseController
      */
     @PostMapping("/checkPostCodeUnique")
     @ResponseBody
-    public boolean checkPostCodeUnique(SysPost post)
-    {
+    public boolean checkPostCodeUnique(SysPost post) {
         return postService.checkPostCodeUnique(post);
     }
 }
