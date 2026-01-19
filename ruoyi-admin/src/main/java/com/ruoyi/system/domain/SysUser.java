@@ -12,7 +12,7 @@ import com.ruoyi.common.annotation.Excel.Type;
 import com.ruoyi.common.annotation.Excels;
 import com.ruoyi.common.domain.BaseEntity;
 import com.ruoyi.common.utils.ShiroUtils;
-import com.ruoyi.common.xss.Xss;
+import com.ruoyi.common.annotation.Xss;
 
 /**
  * 用户对象 sys_user

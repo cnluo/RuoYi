@@ -19,7 +19,7 @@ import com.ruoyi.common.domain.R;
 import com.ruoyi.common.utils.Convert;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.system.service.ConfigService;
+import com.ruoyi.system.service.SystemConfigService;
 
 /**
  * 登录验证
@@ -35,7 +35,7 @@ public class SysLoginController extends BaseController {
     private boolean rememberMe;
 
     @Autowired
-    private ConfigService configService;
+    private SystemConfigService configService;
 
     @GetMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response, ModelMap mmap) {

@@ -24,7 +24,7 @@ import com.ruoyi.common.exception.job.TaskException;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.system.domain.SysJob;
-import com.ruoyi.system.service.ISysJobService;
+import com.ruoyi.system.service.SystemJobService;
 import com.ruoyi.common.utils.CronUtils;
 import com.ruoyi.common.utils.ScheduleUtils;
 
@@ -39,7 +39,7 @@ public class SysJobController extends BaseController {
     private String prefix = "monitor/job";
 
     @Autowired
-    private ISysJobService jobService;
+    private SystemJobService jobService;
 
     @RequiresPermissions("monitor:job:view")
     @GetMapping()

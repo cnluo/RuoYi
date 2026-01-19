@@ -8,7 +8,7 @@ import com.ruoyi.common.domain.Ztree;
 import com.ruoyi.system.domain.SysDept;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.system.service.ISysDeptService;
+import com.ruoyi.system.service.SystemDeptService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ public class SysDeptController extends BaseController {
     private String prefix = "system/dept";
 
     @Autowired
-    private ISysDeptService deptService;
+    private SystemDeptService deptService;
 
     @RequiresPermissions("system:dept:view")
     @GetMapping()

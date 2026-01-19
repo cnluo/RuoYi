@@ -29,12 +29,12 @@ import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.common.shiro.service.SysPasswordService;
-import com.ruoyi.common.shiro.util.AuthorizationUtils;
-import com.ruoyi.system.service.ISysDeptService;
-import com.ruoyi.system.service.ISysPostService;
-import com.ruoyi.system.service.ISysRoleService;
-import com.ruoyi.system.service.ISysUserService;
+import com.ruoyi.system.service.SystemPasswordService;
+import com.ruoyi.common.utils.AuthorizationUtils;
+import com.ruoyi.system.service.SystemDeptService;
+import com.ruoyi.system.service.SystemPostService;
+import com.ruoyi.system.service.SystemRoleService;
+import com.ruoyi.system.service.SystemUserService;
 
 /**
  * 用户信息
@@ -47,19 +47,19 @@ public class SysUserController extends BaseController {
     private String prefix = "system/user";
 
     @Autowired
-    private ISysUserService userService;
+    private SystemUserService userService;
 
     @Autowired
-    private ISysRoleService roleService;
+    private SystemRoleService roleService;
 
     @Autowired
-    private ISysDeptService deptService;
+    private SystemDeptService deptService;
 
     @Autowired
-    private ISysPostService postService;
+    private SystemPostService postService;
 
     @Autowired
-    private SysPasswordService passwordService;
+    private SystemPasswordService passwordService;
 
     @RequiresPermissions("system:user:view")
     @GetMapping()

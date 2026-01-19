@@ -19,7 +19,7 @@ import com.ruoyi.common.domain.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.system.domain.SysPost;
-import com.ruoyi.system.service.ISysPostService;
+import com.ruoyi.system.service.SystemPostService;
 
 /**
  * 岗位信息操作处理
@@ -32,7 +32,7 @@ public class SysPostController extends BaseController {
     private String prefix = "system/post";
 
     @Autowired
-    private ISysPostService postService;
+    private SystemPostService postService;
 
     @RequiresPermissions("system:post:view")
     @GetMapping()

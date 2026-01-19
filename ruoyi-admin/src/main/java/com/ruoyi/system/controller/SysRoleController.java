@@ -21,11 +21,11 @@ import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.common.domain.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.common.shiro.util.AuthorizationUtils;
+import com.ruoyi.common.utils.AuthorizationUtils;
 import com.ruoyi.system.domain.SysUserRole;
-import com.ruoyi.system.service.ISysDeptService;
-import com.ruoyi.system.service.ISysRoleService;
-import com.ruoyi.system.service.ISysUserService;
+import com.ruoyi.system.service.SystemDeptService;
+import com.ruoyi.system.service.SystemRoleService;
+import com.ruoyi.system.service.SystemUserService;
 
 /**
  * 角色信息
@@ -38,13 +38,13 @@ public class SysRoleController extends BaseController {
     private String prefix = "system/role";
 
     @Autowired
-    private ISysRoleService roleService;
+    private SystemRoleService roleService;
 
     @Autowired
-    private ISysUserService userService;
+    private SystemUserService userService;
 
     @Autowired
-    private ISysDeptService deptService;
+    private SystemDeptService deptService;
 
     @RequiresPermissions("system:role:view")
     @GetMapping()

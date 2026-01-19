@@ -36,8 +36,8 @@ import com.ruoyi.common.utils.sql.SqlUtil;
 import com.ruoyi.common.config.GenConfig;
 import com.ruoyi.system.domain.GenTable;
 import com.ruoyi.system.domain.GenTableColumn;
-import com.ruoyi.system.service.IGenTableColumnService;
-import com.ruoyi.system.service.IGenTableService;
+import com.ruoyi.system.service.SystemGenTableColumnService;
+import com.ruoyi.system.service.SystemGenTableService;
 
 /**
  * 代码生成 操作处理
@@ -50,10 +50,10 @@ public class GenController extends BaseController {
     private String prefix = "tool/gen";
 
     @Autowired
-    private IGenTableService genTableService;
+    private SystemGenTableService genTableService;
 
     @Autowired
-    private IGenTableColumnService genTableColumnService;
+    private SystemGenTableColumnService genTableColumnService;
 
     @RequiresPermissions("tool:gen:view")
     @GetMapping()

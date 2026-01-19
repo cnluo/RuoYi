@@ -7,7 +7,7 @@ import com.ruoyi.common.domain.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.system.domain.SysConfig;
-import com.ruoyi.system.service.ISysConfigService;
+import com.ruoyi.system.service.SystemConfigService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +28,7 @@ public class SysConfigController extends BaseController {
     private String prefix = "system/config";
 
     @Autowired
-    private ISysConfigService configService;
+    private SystemConfigService configService;
 
     @RequiresPermissions("system:config:view")
     @GetMapping()

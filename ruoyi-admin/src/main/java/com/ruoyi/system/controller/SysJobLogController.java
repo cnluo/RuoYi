@@ -21,8 +21,8 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.system.domain.SysJob;
 import com.ruoyi.system.domain.SysJobLog;
-import com.ruoyi.system.service.ISysJobLogService;
-import com.ruoyi.system.service.ISysJobService;
+import com.ruoyi.system.service.SystemJobLogService;
+import com.ruoyi.system.service.SystemJobService;
 
 /**
  * 调度日志操作处理
@@ -35,10 +35,10 @@ public class SysJobLogController extends BaseController {
     private String prefix = "monitor/job";
 
     @Autowired
-    private ISysJobService jobService;
+    private SystemJobService jobService;
 
     @Autowired
-    private ISysJobLogService jobLogService;
+    private SystemJobLogService jobLogService;
 
     @RequiresPermissions("monitor:job:view")
     @GetMapping()

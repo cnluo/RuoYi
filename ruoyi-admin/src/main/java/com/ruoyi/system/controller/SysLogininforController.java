@@ -2,7 +2,7 @@ package com.ruoyi.system.controller;
 
 import java.util.List;
 
-import com.ruoyi.common.shiro.service.SysPasswordService;
+import com.ruoyi.system.service.SystemPasswordService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import com.ruoyi.common.domain.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.system.domain.SysLogininfor;
-import com.ruoyi.system.service.ISysLogininforService;
+import com.ruoyi.system.service.SystemLogininforService;
 
 /**
  * 系统访问记录
@@ -30,10 +30,10 @@ public class SysLogininforController extends BaseController {
     private String prefix = "monitor/logininfor";
 
     @Autowired
-    private ISysLogininforService logininforService;
+    private SystemLogininforService logininforService;
 
     @Autowired
-    private SysPasswordService passwordService;
+    private SystemPasswordService passwordService;
 
     @RequiresPermissions("monitor:logininfor:view")
     @GetMapping()

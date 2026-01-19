@@ -2,6 +2,7 @@ package com.ruoyi.system.controller;
 
 import java.util.List;
 
+import com.ruoyi.system.service.OnlineSessionService;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,9 @@ import com.ruoyi.common.utils.Convert;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.enums.OnlineStatus;
 import com.ruoyi.common.utils.ShiroUtils;
-import com.ruoyi.common.shiro.session.OnlineSession;
-import com.ruoyi.common.shiro.session.OnlineSessionDAO;
+import com.ruoyi.common.domain.OnlineSession;
 import com.ruoyi.system.domain.SysUserOnline;
-import com.ruoyi.system.service.ISysUserOnlineService;
+import com.ruoyi.system.service.SystemUserOnlineService;
 
 /**
  * 在线用户监控
@@ -34,10 +34,10 @@ public class SysUserOnlineController extends BaseController {
     private String prefix = "monitor/online";
 
     @Autowired
-    private ISysUserOnlineService userOnlineService;
+    private SystemUserOnlineService userOnlineService;
 
     @Autowired
-    private OnlineSessionDAO onlineSessionDAO;
+    private OnlineSessionService onlineSessionDAO;
 
     @RequiresPermissions("monitor:online:view")
     @GetMapping()

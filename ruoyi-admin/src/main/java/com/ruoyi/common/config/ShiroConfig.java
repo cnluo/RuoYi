@@ -2,22 +2,22 @@ package com.ruoyi.common.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.ruoyi.common.constant.Constants;
-import com.ruoyi.common.shiro.realm.UserRealm;
-import com.ruoyi.common.shiro.rememberMe.CustomCookieRememberMeManager;
-import com.ruoyi.common.shiro.session.OnlineSessionDAO;
-import com.ruoyi.common.shiro.session.OnlineSessionFactory;
+import com.ruoyi.common.filter.online.SystemOnlineSessionFilter;
+import com.ruoyi.common.manager.OnlineSessionFactory;
 import com.ruoyi.common.shiro.web.CustomShiroFilterFactoryBean;
-import com.ruoyi.common.shiro.web.filter.LogoutFilter;
-import com.ruoyi.common.shiro.web.filter.captcha.CaptchaValidateFilter;
-import com.ruoyi.common.shiro.web.filter.csrf.CsrfValidateFilter;
-import com.ruoyi.common.shiro.web.filter.kickout.KickoutSessionFilter;
-import com.ruoyi.common.shiro.web.filter.online.OnlineSessionFilter;
-import com.ruoyi.common.shiro.web.filter.sync.SyncOnlineSessionFilter;
+import com.ruoyi.common.filter.LogoutFilter;
+import com.ruoyi.common.filter.captcha.CaptchaValidateFilter;
+import com.ruoyi.common.filter.csrf.CsrfValidateFilter;
+import com.ruoyi.common.filter.kickout.KickoutSessionFilter;
+import com.ruoyi.common.filter.online.SyncOnlineSessionFilter;
 import com.ruoyi.common.shiro.web.session.OnlineWebSessionManager;
 import com.ruoyi.common.shiro.web.session.SpringSessionValidationScheduler;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.CipherUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
+import com.ruoyi.system.service.OnlineSessionService;
+import com.ruoyi.system.service.SystemUserLoginRememberMeService;
+import com.ruoyi.system.service.SystemUserRealmService;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
@@ -141,6 +141,10 @@ public class ShiroConfig {
 
     @Resource
     private EhCacheConfig ehCacheConfig;
+    @Resource
+    private SystemUserRealmService systemUserRealmService;
+    @Resource
+    private SystemUserLoginRememberMeService systemUserLoginRememberMeService;
 
     /**
      * 缓存管理器 使用Ehcache实现
@@ -162,8 +166,8 @@ public class ShiroConfig {
      * 自定义Realm
      */
     @Bean
-    public UserRealm userRealm(EhCacheManager cacheManager) {
-        UserRealm userRealm = new UserRealm();
+    public SystemUserRealmService userRealm(EhCacheManager cacheManager) {
+        SystemUserRealmService userRealm = new SystemUserRealmService();
         userRealm.setAuthorizationCacheName(Constants.SYS_AUTH_CACHE);
         userRealm.setCacheManager(cacheManager);
         return userRealm;
@@ -173,8 +177,8 @@ public class ShiroConfig {
      * 自定义sessionDAO会话
      */
     @Bean
-    public OnlineSessionDAO sessionDAO() {
-        return new OnlineSessionDAO();
+    public OnlineSessionService onlineSessionService() {
+        return new OnlineSessionService();
     }
 
     /**
@@ -204,7 +208,7 @@ public class ShiroConfig {
         // 是否定时检查session
         manager.setSessionValidationSchedulerEnabled(true);
         // 自定义SessionDao
-        manager.setSessionDAO(sessionDAO());
+        manager.setSessionDAO(onlineSessionService());
         // 自定义sessionFactory
         manager.setSessionFactory(sessionFactory());
         return manager;
@@ -214,12 +218,12 @@ public class ShiroConfig {
      * 安全管理器
      */
     @Bean
-    public SecurityManager securityManager(UserRealm userRealm) {
+    public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 设置realm.
-        securityManager.setRealm(userRealm);
+        securityManager.setRealm(systemUserRealmService);
         // 记住我
-        securityManager.setRememberMeManager(rememberMe ? rememberMeManager() : null);
+        securityManager.setRememberMeManager(rememberMe ? rememberMeManager(systemUserLoginRememberMeService) : null);
         // 注入缓存管理器;
         securityManager.setCacheManager(getEhCacheManager());
         // session管理器
@@ -306,10 +310,10 @@ public class ShiroConfig {
     /**
      * 自定义在线用户处理过滤器
      */
-    public OnlineSessionFilter onlineSessionFilter() {
-        OnlineSessionFilter onlineSessionFilter = new OnlineSessionFilter();
+    public SystemOnlineSessionFilter onlineSessionFilter() {
+        SystemOnlineSessionFilter onlineSessionFilter = new SystemOnlineSessionFilter();
         onlineSessionFilter.setLoginUrl(loginUrl);
-        onlineSessionFilter.setOnlineSessionDAO(sessionDAO());
+        onlineSessionFilter.setOnlineSessionDAO(onlineSessionService());
         return onlineSessionFilter;
     }
 
@@ -318,7 +322,7 @@ public class ShiroConfig {
      */
     public SyncOnlineSessionFilter syncOnlineSessionFilter() {
         SyncOnlineSessionFilter syncOnlineSessionFilter = new SyncOnlineSessionFilter();
-        syncOnlineSessionFilter.setOnlineSessionDAO(sessionDAO());
+        syncOnlineSessionFilter.setOnlineSessionDAO(onlineSessionService());
         return syncOnlineSessionFilter;
     }
 
@@ -347,15 +351,14 @@ public class ShiroConfig {
     /**
      * 记住我
      */
-    public CustomCookieRememberMeManager rememberMeManager() {
-        CustomCookieRememberMeManager cookieRememberMeManager = new CustomCookieRememberMeManager();
-        cookieRememberMeManager.setCookie(rememberMeCookie());
+    public SystemUserLoginRememberMeService rememberMeManager(SystemUserLoginRememberMeService systemUserLoginRememberMeService) {
+        systemUserLoginRememberMeService.setCookie(rememberMeCookie());
         if (StringUtils.isNotEmpty(cipherKey)) {
-            cookieRememberMeManager.setCipherKey(Base64.decode(cipherKey));
+            systemUserLoginRememberMeService.setCipherKey(Base64.decode(cipherKey));
         } else {
-            cookieRememberMeManager.setCipherKey(CipherUtils.generateNewKey(128, "AES").getEncoded());
+            systemUserLoginRememberMeService.setCipherKey(CipherUtils.generateNewKey(128, "AES").getEncoded());
         }
-        return cookieRememberMeManager;
+        return systemUserLoginRememberMeService;
     }
 
     /**

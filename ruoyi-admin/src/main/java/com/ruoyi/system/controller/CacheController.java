@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.context.BaseController;
 import com.ruoyi.common.domain.R;
-import com.ruoyi.system.service.CacheService;
+import com.ruoyi.system.service.SystemCacheService;
 
 /**
  * 缓存监控
@@ -23,7 +23,7 @@ public class CacheController extends BaseController {
     private String prefix = "monitor/cache";
 
     @Autowired
-    private CacheService cacheService;
+    private SystemCacheService cacheService;
 
     @RequiresPermissions("monitor:cache:view")
     @GetMapping()

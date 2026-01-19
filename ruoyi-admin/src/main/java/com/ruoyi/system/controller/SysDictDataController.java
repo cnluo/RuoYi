@@ -19,7 +19,7 @@ import com.ruoyi.system.domain.SysDictData;
 import com.ruoyi.common.domain.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.system.service.ISysDictDataService;
+import com.ruoyi.system.service.SystemDictDataService;
 
 /**
  * 数据字典信息
@@ -32,7 +32,7 @@ public class SysDictDataController extends BaseController {
     private String prefix = "system/dict/data";
 
     @Autowired
-    private ISysDictDataService dictDataService;
+    private SystemDictDataService dictDataService;
 
     @RequiresPermissions("system:dict:view")
     @GetMapping()

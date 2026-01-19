@@ -21,8 +21,8 @@ import com.ruoyi.system.domain.SysMenu;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.ShiroUtils;
-import com.ruoyi.common.shiro.util.AuthorizationUtils;
-import com.ruoyi.system.service.ISysMenuService;
+import com.ruoyi.common.utils.AuthorizationUtils;
+import com.ruoyi.system.service.SystemMenuService;
 
 /**
  * 菜单信息
@@ -35,7 +35,7 @@ public class SysMenuController extends BaseController {
     private String prefix = "system/menu";
 
     @Autowired
-    private ISysMenuService menuService;
+    private SystemMenuService menuService;
 
     @RequiresPermissions("system:menu:view")
     @GetMapping()

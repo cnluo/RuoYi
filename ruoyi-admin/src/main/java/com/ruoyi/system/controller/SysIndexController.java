@@ -23,9 +23,9 @@ import com.ruoyi.common.utils.CookieUtils;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.common.shiro.service.SysPasswordService;
-import com.ruoyi.system.service.ISysConfigService;
-import com.ruoyi.system.service.ISysMenuService;
+import com.ruoyi.system.service.SystemPasswordService;
+import com.ruoyi.system.service.SystemConfigService;
+import com.ruoyi.system.service.SystemMenuService;
 
 /**
  * 首页 业务处理
@@ -36,13 +36,13 @@ import com.ruoyi.system.service.ISysMenuService;
 public class SysIndexController extends BaseController
 {
     @Autowired
-    private ISysMenuService menuService;
+    private SystemMenuService menuService;
 
     @Autowired
-    private ISysConfigService configService;
+    private SystemConfigService configService;
 
     @Autowired
-    private SysPasswordService passwordService;
+    private SystemPasswordService passwordService;
 
     // 系统首页
     @GetMapping("/index")

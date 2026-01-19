@@ -72,7 +72,8 @@ spring:
     restart:
       # 热部署开关
       enabled: true
-
+  main:
+      allow-bean-definition-overriding : true
 # MyBatis
 mybatis:
   # 搜索指定包别名

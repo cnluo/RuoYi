@@ -9,8 +9,8 @@ import com.ruoyi.common.context.BaseController;
 import com.ruoyi.common.domain.R;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.common.shiro.service.SysRegisterService;
-import com.ruoyi.system.service.ISysConfigService;
+import com.ruoyi.system.service.SystemRegisterService;
+import com.ruoyi.system.service.SystemConfigService;
 
 /**
  * 注册验证
@@ -20,10 +20,10 @@ import com.ruoyi.system.service.ISysConfigService;
 @Controller
 public class SysRegisterController extends BaseController {
     @Autowired
-    private SysRegisterService registerService;
+    private SystemRegisterService registerService;
 
     @Autowired
-    private ISysConfigService configService;
+    private SystemConfigService configService;
 
     @GetMapping("/register")
     public String register() {

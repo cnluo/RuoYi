@@ -18,7 +18,7 @@ import com.ruoyi.common.domain.R;
 import com.ruoyi.common.domain.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.system.domain.SysNotice;
-import com.ruoyi.system.service.ISysNoticeService;
+import com.ruoyi.system.service.SystemNoticeService;
 
 /**
  * 公告 信息操作处理
@@ -31,7 +31,7 @@ public class SysNoticeController extends BaseController {
     private String prefix = "system/notice";
 
     @Autowired
-    private ISysNoticeService noticeService;
+    private SystemNoticeService noticeService;
 
     @RequiresPermissions("system:notice:view")
     @GetMapping()
